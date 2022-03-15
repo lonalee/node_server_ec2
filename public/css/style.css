@@ -1,5 +1,5 @@
 body {
-    background-color: aqua;
+    background-color: #ece8e3
 }
 
 p {
@@ -10,4 +10,12 @@ p {
     width: 400px;
     margin-top: 50px;
     text-align: center;
+}
+
+.card-container {
+    padding-top: 5px;
+}
+
+.brand-logo {
+    margin: auto 60px;
 }

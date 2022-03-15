@@ -1,1 +1,27 @@
-<h1>IT IS DASHBOARD</h1>
+<h6>DASHBOARD</h6>
+<h3>Welcome {{name}}</h3>
+<p>Here are Some information</p>
+{{#if stories}}
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each stories}}
+                <tr>
+                    <td><a href="/stories/{{_id}}"></a>{{title}}</td>
+                    <td>{{formatDate createdAt 'yyyy MMMM Do hh:mm a'}}</td>
+                    <td><span class="dash-status">{{status}}</span></td>
+                    <td></td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+{{else}}
+    <p>No stories found</p>
+{{/if}}
