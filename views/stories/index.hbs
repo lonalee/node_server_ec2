@@ -4,11 +4,15 @@
     <div class="col s12 m4">
         <div class="card">
             <div class="card-image">
-                {{!-- TODO editIcon --}}
+                {{!-- storyUser, loggedUser, storyId --}}
+                {{{editIcon user ../user _id}}}
             </div>
             <div class="card-content center-align">
                 <h5>{{title}}</h5>
-                <p>{{body}}</p>
+                <p>{{stripTags (truncate body 50)}}</p>
+                {{!-- helper함수를 import할 필요 없음
+                      app.js에서 엔진에 넣어주면 동작. arguments를 전달하는 형식에 주의
+                 --}}
                 <br>
                 <div class="chip">
                     <img src="{{user.image}}" alt="">

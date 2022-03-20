@@ -30,10 +30,10 @@ if(process.env.NODE_ENV === 'development') {
 }
 
 // Handlebars helpers
-const { formatDate } = require('./helper/hbs')
+const { formatDate, truncate, stripTags, editIcon } = require('./helper/hbs')
 
 // handlebars - template engine : 마크업에 사용될 템플릿 처리
-app.engine('.hbs', exphbs.engine({ helpers: { formatDate}, defaultLayout: 'main', extname: '.hbs'}))
+app.engine('.hbs', exphbs.engine({ helpers: { formatDate, truncate, stripTags, editIcon }, defaultLayout: 'main', extname: '.hbs'}))
 app.set('view engine', '.hbs')
 
 // session (express-session)
@@ -50,6 +50,12 @@ app.use(session({
 // passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
+
+// Set global var
+app.use((req, res, next) => {
+    res.locals.user = req.user || null
+    next()
+})
 
 // static folder
 app.use(express.static(path.join(__dirname, 'public')))

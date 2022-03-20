@@ -30,4 +30,28 @@ router.post('/', ensureAuth, async (req,res) => {
     }
 })
 
+/**
+ * @description Show all public stories
+ * @routes POST /stories 
+ */
+
+router.get('/', ensureAuth, async (req,res) => {
+    try {
+        // public status인 데이터를 찾기
+        const stories = await Story.find({ status: 'public'})
+            .populate('user')
+            .sort({ createdAt: 'desc' })
+            .lean()
+        console.log('populated user stories', stories)
+
+        res.render('stories/index', {
+            stories
+        })
+
+    } catch (error) {
+        console.error(error)
+        res.render('errors/500')
+    }
+})
+
 module.exports = router
