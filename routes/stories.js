@@ -32,7 +32,7 @@ router.post('/', ensureAuth, async (req,res) => {
 
 /**
  * @description Show all public stories
- * @routes POST /stories 
+ * @routes GET /stories 
  */
 
 router.get('/', ensureAuth, async (req,res) => {
@@ -42,7 +42,6 @@ router.get('/', ensureAuth, async (req,res) => {
             .populate('user')
             .sort({ createdAt: 'desc' })
             .lean()
-        console.log('populated user stories', stories)
 
         res.render('stories/index', {
             stories
@@ -52,6 +51,33 @@ router.get('/', ensureAuth, async (req,res) => {
         console.error(error)
         res.render('errors/500')
     }
+})
+
+/**
+ * @description Show edit page
+ * @routes GET /stories/edit/:id 
+ */
+
+ router.get('/edit/:id', ensureAuth, async (req,res) => {
+    const story = await Story.findOne({
+        _id: req.params.id
+    }).lean()
+
+    if(!story) {
+        return res.render('error/404')
+    }
+
+
+    if(story.user != req.user.id) {
+        // !== 비교를 하면 new ObjectId 형식과 비교할 수 없음??
+        res.redirect('/stories')
+    } else {
+        res.render('stories/edit', {
+            story
+        })
+    }
+
+
 })
 
 module.exports = router

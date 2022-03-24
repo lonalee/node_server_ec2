@@ -30,10 +30,11 @@ if(process.env.NODE_ENV === 'development') {
 }
 
 // Handlebars helpers
-const { formatDate, truncate, stripTags, editIcon } = require('./helper/hbs')
+const { formatDate, truncate, stripTags, editIcon,select } = require('./helper/hbs')
 
 // handlebars - template engine : 마크업에 사용될 템플릿 처리
-app.engine('.hbs', exphbs.engine({ helpers: { formatDate, truncate, stripTags, editIcon }, defaultLayout: 'main', extname: '.hbs'}))
+app.engine('.hbs', exphbs.engine({ helpers: 
+    { formatDate, truncate, stripTags, editIcon, select }, defaultLayout: 'main', extname: '.hbs'}))
 app.set('view engine', '.hbs')
 
 // session (express-session)

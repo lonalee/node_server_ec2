@@ -18,13 +18,12 @@ module.exports = {
         return str
     },
     stripTags: (input) => {
-        console.log('stripTags', input)
         return input.replace(/<(?:.|\n)*?>/gm, '')
     },
     editIcon: (storyUser, loggedUser, storyId, floating= true) => {
         if(storyUser._id.toString() === loggedUser._id.toString()) {
             if(floating) {
-                return `<a href="stories/edit/${storyId}" class="btn-floating halfwat-fab blue">
+                return `<a href="/stories/edit/${storyId}" class="btn-floating halfwat-fab blue">
                 <i class="fas fa-edit fa-small"></i>
             </a>`
             } else {
@@ -34,5 +33,13 @@ module.exports = {
         } else {
             return ''
         }
-    }
+    },
+    select: (selected, options) => options.fn(this).replace(
+            new RegExp(' value="' + selected + '"'),
+            '$& selected="selected"'
+    )
+    .replace(
+        new RegExp('>' + selected + '</option>'),
+        ' selected="selected"$&'
+    )
 }
