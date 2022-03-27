@@ -30,7 +30,7 @@ router.get('/dashboard', ensureAuth, async (req,res) => {
         const stories = await Story.find({
             user: req.user ? req.user.id : '622e527c384c33692dd400b5'
         }).lean()
-        console.log('*** routes to dashboard *** stories :', stories)
+        
         res.render('dashboard', {
             name: req.user ? req.user.displayName : 'temp user',
             stories
