@@ -4,7 +4,7 @@
   "description": "oauth tester and make somethings happen",
   "main": "app.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production /usr/bin/node app",
+    "start": "cross-env NODE_ENV=production /usr/local/bin/node app",
     "dev": "cross-env NODE_ENV=development nodemon app"
   },
   "author": "",
